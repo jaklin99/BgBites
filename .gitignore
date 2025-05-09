@@ -1,0 +1,72 @@
+# Node.js
+/node_modules/
+/dist/
+/build/
+/package-lock.json
+/npm-debug.log
+/yarn-error.log
+/.pnp/
+/.pnp.js
+
+# IDE files
+.vscode/
+.idea/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Java and Spring Boot
+*.class
+*.jar
+*.war
+*.ear
+
+# Gradle files
+.gradle/
+/build/
+
+# IntelliJ IDEA
+/.idea/
+/*.iml
+
+# Eclipse files
+/.project
+/.classpath
+/.settings/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Maven (if used for build)
+target/
+
+# Spring Boot (only if you don't want to include the jar or war)
+*.jar
+*.war
+
+# Lombok
+*.class
+
+# Temp files
+*.tmp
+*.swp
+*.swo
+
+# npm logs
+npm-debug.log
+
+# Maven wrapper logs
+mvnw*
+mvnw.cmd
+
+# JUnit test output (you can enable if you want to include the test results)
+test-outputs/
+
+# Spring Boot specific (if you don't want to commit the .mvnw wrapper, etc.)
+/mvnw
+/mvnw.cmd
