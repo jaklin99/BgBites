@@ -18,11 +18,35 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // Spring Boot Web Starter
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Spring Boot JPA Starter for Database Access
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Spring Boot Security Starter (Optional, only if you plan on adding authentication later)
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // MySQL Connector (Ensure the correct version)
+    implementation 'mysql:mysql-connector-java:8.0.30'
+
+    // Thymeleaf for server-side rendering (Optional for the front end)
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // Lombok for reducing boilerplate code (Optional but useful)
+    implementation 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok' // Lombok only needed at compile time
+
+    // Spring Boot Validation Starter
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Testing dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // Spring Boot testing support
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1' // JUnit 5 API
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.1' // JUnit 5 Engine for test execution
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
+
+// tasks.named('test') {
+// 	useJUnitPlatform()
+// }
