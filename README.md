@@ -116,26 +116,47 @@ npm start
 
 🗂 Project Structure
 project-root/
-├── backend/ # Java Spring Boot project
-│ ├── src/
-│ │ ├── main/
-│ │ │ ├── java/com/example/recipeapp/
-│ │ │ │ ├── controller/
-│ │ │ │ ├── model/
-│ │ │ │ ├── repository/
-│ │ │ │ └── RecipeAppApplication.java
-│ │ │ └── resources/
-│ │ │ └── application.properties
-│ └── build.gradle
-├── frontend/ # React frontend
+backend/
+├── build.gradle
+├── settings.gradle
+├── src/
+│ ├── main/
+│ │ ├── java/
+│ │ │ └── com/
+│ │ │ └── example/
+│ │ │ └── bgBites/
+│ │ │ ├── BgBitesApplication.java
+│ │ │ ├── controller/
+│ │ │ │ ├── RecipeController.java
+│ │ │ │ └── AdminRecipeController.java
+│ │ │ ├── entity/
+│ │ │ │ ├── Recipe.java
+│ │ │ │ └── Admin.java
+│ │ │ ├── repository/
+│ │ │ │ ├── RecipeRepository.java
+│ │ │ │ └── AdminRepository.java
+│ │ │ ├── security/
+│ │ │ │ ├── JwtFilter.java
+│ │ │ │ ├── JwtUtil.java
+│ │ │ │ ├── AdminDetailsService.java
+│ │ │ │ └── SecurityConfig.java
+│ │ │ └── auth/
+│ │ │ ├── AuthController.java
+│ │ │ ├── AuthRequest.java
+│ │ │ └── AuthResponse.java
+│ └── resources/
+│ ├── application.properties
+│ └── static/
+└── .gitignore
+frontend/ # React frontend
 │ ├── public/
 │ ├── src/
 │ │ ├── components/
 │ │ ├── pages/
 │ │ └── App.js
 │ └── package.json
-├── .gitignore
-└── README.md
+.gitignore
+README.md
 
 | Feature                | Guest User | Admin User    |
 | ---------------------- | ---------- | ------------- |
