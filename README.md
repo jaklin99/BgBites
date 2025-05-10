@@ -27,7 +27,14 @@ A responsive food blog platform where you can share full recipes, including prep
 
 ### Frontend Setup (React)
 
-#### 1. Clone or Download the Project
+#### ✅ 1. Features
+
+- Responsive design
+- Navigation: `Home / Recipes / Contact`
+- Guest view for browsing
+- Admin panel with login and full CRUD
+
+#### 2. Clone or Download the Project
 
 git clone https://github.com/yourusername/BGBITES_BEYOND.git
 
@@ -37,7 +44,24 @@ npm start
 
 This will launch the React app on http://localhost:3000
 
+### 🧩 3. Components
+
+- `Navbar`: Navigation bar
+- `RecipeCard`: Display recipes
+- `RecipeDetails`: View full recipe
+- `RecipeForm`: Add/edit recipes (admin)
+- `ContactForm`: Send messages
+- `AdminLogin`: Auth interface
+
 ### Backend Setup (Spring Boot)
+
+#### ✅ Technologies
+
+- Java 17+
+- Spring Boot (Web, Data JPA, Security, Validation)
+- MySQL
+- Gradle
+- Lombok
 
 #### 1. Requirements:
 
@@ -67,6 +91,19 @@ Run the Spring Boot application:
 bash:
 ./mvnw spring-boot:run
 
+### Run Instructions
+
+#### Backend
+
+cd backend/
+./gradlew bootRun
+
+#### Frontend
+
+cd frontend/
+npm install
+npm start
+
 ### Test
 
 1. Visit http://localhost:3000
@@ -77,7 +114,33 @@ bash:
 
 ### Folder Structure
 
-BGBITES_BEYOND/
-├── frontend/ # React App
-├── backend/ # Spring Boot App
+🗂 Project Structure
+project-root/
+├── backend/ # Java Spring Boot project
+│ ├── src/
+│ │ ├── main/
+│ │ │ ├── java/com/example/recipeapp/
+│ │ │ │ ├── controller/
+│ │ │ │ ├── model/
+│ │ │ │ ├── repository/
+│ │ │ │ └── RecipeAppApplication.java
+│ │ │ └── resources/
+│ │ │ └── application.properties
+│ └── build.gradle
+├── frontend/ # React frontend
+│ ├── public/
+│ ├── src/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ └── App.js
+│ └── package.json
+├── .gitignore
 └── README.md
+
+| Feature                | Guest User | Admin User    |
+| ---------------------- | ---------- | ------------- |
+| View Recipes           | ✅         | ✅            |
+| View Recipe Details    | ✅         | ✅            |
+| Contact Form           | ✅         | ✅            |
+| Add/Edit/Delete Recipe | ❌         | ✅            |
+| Login/Logout           | ❌         | ✅ (optional) |
