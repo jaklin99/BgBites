@@ -13,15 +13,32 @@ import java.util.List;
 public class RecipeController {
 
     @Autowired
-    private RecipeRepository recipeRepository;
+    private RecipeRepository repo;
 
     @GetMapping
-    public List<Recipe> getAllRecipes() {
-        return recipeRepository.findAll();
+    public List<Recipe> getAll() {
+        return repo.findAll();
     }
 
     @GetMapping("/{id}")
-    public Recipe getRecipeById(@PathVariable Long id) {
-        return recipeRepository.findById(id).orElseThrow();
+    public Recipe getById(@PathVariable Long id) {
+        return repo.findById(id).orElseThrow();
+    }
+
+    @PostMapping
+    public Recipe create(@RequestBody Recipe recipe) {
+        return repo.save(recipe);
+    }
+
+    @PutMapping("/{id}")
+    public Recipe update(@PathVariable Long id, @RequestBody Recipe recipe) {
+        Recipe existingRecipe = repo.findById(id).orElseThrow();
+        recipe.setId(existingRecipe.getId());
+        return repo.save(recipe);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        repo.deleteById(id);
     }
 }
