@@ -1,21 +1,19 @@
-// src/components/Footer.js
 import React from "react";
-import "./Footer.css";
+import "../App.css"; // or wherever your CSS is
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 
 function Footer() {
   return (
-    <footer className="bg-dark-green text-white py-4 px-3 d-flex justify-content-between">
-      <div className="footer-brand">BGBITES&BEYOND</div>
-      <div className="footer-links">
-        <a href="/contact" className="text-white d-block">
-          Contact Us
-        </a>
-        <a href="/recipes" className="text-white d-block">
-          Recipes
-        </a>
-        <a href="/about" className="text-white d-block">
-          Privacy Policy
-        </a>
+    <footer className="footer">
+      <div className="footer-left">&copy; 2025 BGBITES&BEYOND</div>
+      <div className="d-flex justify-content-center gap-3">
+        <div className="footer-right">
+          <a href="/recipes">Recipes</a> | <a href="/about">Privary Policy</a> |{" "}
+          <a href="/contact">Contact</a>
+        </div>
+        <FaFacebook size={20} />
+        <FaInstagram size={20} />
+        <FaTiktok size={20} />
       </div>
     </footer>
   );

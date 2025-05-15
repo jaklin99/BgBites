@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "./App.css";
+import "../App.css";
 
 function RecipeDetails() {
   const { id } = useParams();
@@ -42,3 +42,42 @@ function RecipeDetails() {
 }
 
 export default RecipeDetails;
+
+
+// import React, { useEffect, useState } from "react";
+// import { useParams } from "react-router-dom";
+// import axios from "axios";
+// import "./App.css";
+
+// function RecipeDetail() {
+//   const { id } = useParams();
+//   const [recipe, setRecipe] = useState(null);
+
+//   useEffect(() => {
+//     axios.get(`http://localhost:8080/recipes/${id}`)
+//       .then(res => setRecipe(res.data))
+//       .catch(err => console.error("Error:", err));
+//   }, [id]);
+
+//   if (!recipe) return <p>Loading...</p>;
+
+//   return (
+//     <div className="recipe-detail">
+//       <h2>{recipe.title}</h2>
+//       <img src={recipe.imageUrl} alt={recipe.title} className="detail-img" />
+//       <div className="detail-meta">
+//         <p><strong>Prep:</strong> {recipe.prepTime}</p>
+//         <p><strong>Cook:</strong> {recipe.cookTime}</p>
+//         <p><strong>Servings:</strong> {recipe.servings}</p>
+//       </div>
+//       <div className="detail-section">
+//         <h3>Ingredients</h3>
+//         <p>{recipe.ingredients}</p>
+//         <h3>Instructions</h3>
+//         <p>{recipe.instructions}</p>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default RecipeDetail;

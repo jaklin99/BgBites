@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./App.css";
+import "../App.css";
 
 function RecipeList() {
   const [recipes, setRecipes] = useState([]);
@@ -33,3 +33,31 @@ function RecipeList() {
 }
 
 export default RecipeList;
+
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import RecipeCard from "../components/RecipeCard";
+// import "./App.css";
+
+// function Recipes() {
+//   const [recipes, setRecipes] = useState([]);
+
+//   useEffect(() => {
+//     axios.get("http://localhost:8080/recipes")
+//       .then(res => setRecipes(res.data))
+//       .catch(err => console.error("Error fetching recipes:", err));
+//   }, []);
+
+//   return (
+//     <div className="recipes-page">
+//       <h2>All Recipes</h2>
+//       <div className="recipe-grid">
+//         {recipes.map(recipe => (
+//           <RecipeCard key={recipe.id} recipe={recipe} />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Recipes;
