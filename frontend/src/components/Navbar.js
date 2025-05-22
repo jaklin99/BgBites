@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <div className="navbar-logo">BgBites</div>
+        <div className="navbar-logo">BG Bites</div>
         <div className="navbar-links">
           {!isAdmin ? (
             <>
