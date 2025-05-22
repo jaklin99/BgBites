@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
+import ThemeToggle from "./ThemeToggle"; // adjust path as needed
 import "../App.css";
 import { Form, FormControl, Button } from "react-bootstrap";
 
@@ -8,6 +8,20 @@ const Navbar = () => {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith("/admin");
 
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    const stored = localStorage.getItem("theme") || "light";
+    setTheme(stored);
+    document.body.className = stored;
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.body.className = newTheme;
+  };
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -52,10 +66,7 @@ const Navbar = () => {
 
       {!isAdmin && (
         <div className="navbar-right">
-          <div className="navbar-search">
-            <FaSearch className="search-icon" />
-            <input type="text" placeholder="Search" />
-          </div>
+          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
           <Link to="/signin" className="nav-auth-link">
             Sign in
           </Link>
