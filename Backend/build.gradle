@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.4.5'
+	id 'org.springframework.boot' version '3.4.6'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -21,8 +21,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	
-	// Spring Boot Web Starter
+		// Spring Boot Web Starter
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     // Spring Boot JPA Starter for Database Access
