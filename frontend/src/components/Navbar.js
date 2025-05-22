@@ -37,13 +37,7 @@ const Navbar = () => {
                 Home
               </Link>
               <Link to="/recipe" className="btn btn-signup">
-                Recipe
-              </Link>
-              <Link to="/bundles" className="btn btn-signup">
-                Bundles
-              </Link>
-              <Link to="/blog" className="btn btn-signup">
-                Blog
+                Recipes
               </Link>
               <Form className="d-flex search-form">
                 <FormControl
