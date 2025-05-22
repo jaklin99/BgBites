@@ -11,9 +11,13 @@ const Navbar = () => {
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme") || "light";
-    setTheme(stored);
-    document.body.className = stored;
+    const stored = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    const initialTheme = stored || (prefersDark ? "dark" : "light");
+    setTheme(initialTheme);
+    document.body.className = initialTheme;
   }, []);
 
   const toggleTheme = () => {

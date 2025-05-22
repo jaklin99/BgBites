@@ -1,13 +1,15 @@
 import React from "react";
-import "../App.css";
+import "../App.css"; // optional: place styles in separate file or inline
 
 const ThemeToggle = ({ theme, toggleTheme }) => {
   return (
-    <button
-      onClick={toggleTheme}
-      className={`theme-toggle ${theme === "dark" ? "dark" : "light"}`}
-      aria-label="Toggle Dark Mode"
-    />
+    <div className="theme-toggle-wrapper" onClick={toggleTheme}>
+      <div
+        className={`theme-toggle ${theme}`}
+        role="switch"
+        aria-checked={theme === "dark"}
+      />
+    </div>
   );
 };
 
