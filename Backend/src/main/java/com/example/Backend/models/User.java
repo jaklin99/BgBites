@@ -11,7 +11,9 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    private String role; // "ADMIN" or "USER"
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     // Getter and Setter for id
     public Long getId() {
@@ -40,12 +42,11 @@ public class User {
         this.password = password;
     }
 
-    // Getter and Setter for role
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

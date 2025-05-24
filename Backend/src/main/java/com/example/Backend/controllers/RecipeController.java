@@ -1,19 +1,31 @@
 package com.example.Backend.controllers;
 
+// models
 import com.example.Backend.models.Recipe;
+import com.example.Backend.models.User;
+import com.example.Backend.models.Role;
+// repos
 import com.example.Backend.repositories.RecipeRepository;
+import com.example.Backend.repositories.UserRepository;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/recipes")
+@CrossOrigin(origins = "*")
 public class RecipeController {
 
     @Autowired
     private RecipeRepository repo;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping
     public List<Recipe> getAll() {
@@ -26,19 +38,34 @@ public class RecipeController {
     }
 
     @PostMapping
-    public Recipe create(@RequestBody Recipe recipe) {
-        return repo.save(recipe);
+    public ResponseEntity<?> create(@RequestBody Recipe recipe, Authentication authentication) {
+        if (!isAdmin(authentication)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only admins can create recipes.");
+        }
+        return ResponseEntity.ok(repo.save(recipe));
     }
 
     @PutMapping("/{id}")
-    public Recipe update(@PathVariable Long id, @RequestBody Recipe recipe) {
-        Recipe existingRecipe = repo.findById(id).orElseThrow();
-        recipe.setId(existingRecipe.getId());
-        return repo.save(recipe);
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Recipe recipe, Authentication authentication) {
+        if (!isAdmin(authentication)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only admins can update recipes.");
+        }
+        recipe.setId(id);
+        return ResponseEntity.ok(repo.save(recipe));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id, Authentication authentication) {
+        if (!isAdmin(authentication)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only admins can delete recipes.");
+        }
         repo.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+
+    private boolean isAdmin(Authentication authentication) {
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username).orElseThrow();
+        return user.getRole() == Role.ADMIN;
     }
 }
