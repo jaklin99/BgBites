@@ -9,7 +9,7 @@ function RecipeDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/recipes/${id}`)
+      .get(`http://localhost:8080//recipes/${id}`)
       .then((response) => setRecipe(response.data))
       .catch((error) => console.error("Error:", error));
   }, [id]);
@@ -42,7 +42,6 @@ function RecipeDetails() {
 }
 
 export default RecipeDetails;
-
 
 // import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";

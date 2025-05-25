@@ -593,3 +593,14 @@ body.dark .subscription-form button {
   background-color: #f1f1f1;
   color: #111;
 }
+
+/* LOGIN */
+.form-container input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-container button {
+  padding: 0.6rem 1.2rem;
+}

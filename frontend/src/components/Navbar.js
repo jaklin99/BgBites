@@ -36,7 +36,7 @@ const Navbar = () => {
               <Link to="/" className="btn btn-signup">
                 Home
               </Link>
-              <Link to="/recipe" className="btn btn-signup">
+              <Link to="/recipes" className="btn btn-signup">
                 Recipes
               </Link>
               <Form className="d-flex search-form">
@@ -53,7 +53,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link to="/admin/dashboard">Dashboard</Link>
+              <Link to="/admin/create-recipe">Create Recipe</Link>
               <Link to="/admin/register">Register</Link>
               <Link to="/admin/create-user">Create User</Link>
               <Link to="/admin/login">Logout</Link>

@@ -1,47 +1,32 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import RecipeForm from "./RecipeForm";
+import "../App.css";
 
 function AdminDashboard() {
-  const [recipes, setRecipes] = useState([]);
   const [editingRecipe, setEditingRecipe] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const fetchRecipes = () => {
-    axios
-      .get("http://localhost:8080/api/recipes")
-      .then((res) => setRecipes(res.data))
-      .catch((err) => console.error(err));
-  };
+  const handleSuccess = (recipeTitle) => {
+    setSuccessMessage(`✅ Recipe "${recipeTitle}" was successfully created!`);
 
-  useEffect(() => {
-    fetchRecipes();
-  }, []);
+    // Clear the message after a few seconds
+    setTimeout(() => setSuccessMessage(""), 4000);
 
-  const deleteRecipe = (id) => {
-    axios
-      .delete(`http://localhost:8080/api/recipes/${id}`)
-      .then(() => fetchRecipes());
+    // Reset editing mode
+    setEditingRecipe(null);
   };
 
   return (
     <div className="dashboard">
       <h2>Admin Dashboard</h2>
+
+      {successMessage && <div className="success-banner">{successMessage}</div>}
+
       <RecipeForm
-        onSuccess={fetchRecipes}
+        onSuccess={handleSuccess}
         editingRecipe={editingRecipe}
         setEditingRecipe={setEditingRecipe}
       />
-
-      <h3>All Recipes</h3>
-      <ul className="admin-recipe-list">
-        {recipes.map((r) => (
-          <li key={r.id}>
-            <strong>{r.title}</strong>
-            <button onClick={() => setEditingRecipe(r)}>Edit</button>
-            <button onClick={() => deleteRecipe(r.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

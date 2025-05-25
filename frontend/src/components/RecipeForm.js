@@ -1,6 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// Create a base axios instance
+const api = axios.create({
+  baseURL: "http://localhost:8080",
+});
+
+// Set up Basic Auth (replace with real credentials or pass as props)
+const USERNAME = "admin";
+const PASSWORD = "a1234n";
+const authHeader = {
+  auth: {
+    username: USERNAME,
+    password: PASSWORD,
+  },
+};
+
 function RecipeForm({ onSuccess, editingRecipe, setEditingRecipe }) {
   const [form, setForm] = useState({
     title: "",
@@ -17,8 +32,8 @@ function RecipeForm({ onSuccess, editingRecipe, setEditingRecipe }) {
     if (editingRecipe) {
       setForm({
         ...editingRecipe,
-        ingredients: editingRecipe.ingredients.join("\n"),
-        instructions: editingRecipe.instructions.join("\n"),
+        ingredients: editingRecipe.ingredients || "",
+        instructions: editingRecipe.instructions || "",
       });
     }
   }, [editingRecipe]);
@@ -29,40 +44,50 @@ function RecipeForm({ onSuccess, editingRecipe, setEditingRecipe }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const payload = {
       ...form,
-      ingredients: form.ingredients.split("\n"),
-      instructions: form.instructions.split("\n"),
+      servings: parseInt(form.servings),
+      ingredients: form.ingredients.trim(),
+      instructions: form.instructions.trim(),
     };
 
     const request = editingRecipe
-      ? axios.put(
-          `http://localhost:8080/api/recipes/${editingRecipe.id}`,
-          payload
-        )
-      : axios.post("http://localhost:8080/api/recipes", payload);
+      ? api.put(`/recipes/${editingRecipe.id}`, payload, authHeader)
+      : api.post("/recipes", payload, authHeader);
 
     request
       .then(() => {
         onSuccess();
-        setForm({
-          title: "",
-          prepTime: "",
-          cookTime: "",
-          servings: "",
-          imageUrl: "",
-          videoUrl: "",
-          ingredients: "",
-          instructions: "",
-        });
-        setEditingRecipe(null);
+        resetForm();
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(
+          "Error saving recipe:",
+          err.response?.data || err.message
+        );
+        alert("Failed to save recipe. Make sure you're logged in as an admin.");
+      });
+  };
+
+  const resetForm = () => {
+    setForm({
+      title: "",
+      prepTime: "",
+      cookTime: "",
+      servings: "",
+      imageUrl: "",
+      videoUrl: "",
+      ingredients: "",
+      instructions: "",
+    });
+    setEditingRecipe(null);
   };
 
   return (
     <form className="recipe-form" onSubmit={handleSubmit}>
       <h3>{editingRecipe ? "Edit Recipe" : "Add Recipe"}</h3>
+
       <input
         name="title"
         value={form.title}
@@ -74,14 +99,14 @@ function RecipeForm({ onSuccess, editingRecipe, setEditingRecipe }) {
         name="prepTime"
         value={form.prepTime}
         onChange={handleChange}
-        placeholder="Prep Time (mins)"
+        placeholder="Prep Time"
         required
       />
       <input
         name="cookTime"
         value={form.cookTime}
         onChange={handleChange}
-        placeholder="Cook Time (mins)"
+        placeholder="Cook Time"
         required
       />
       <input
@@ -90,6 +115,7 @@ function RecipeForm({ onSuccess, editingRecipe, setEditingRecipe }) {
         onChange={handleChange}
         placeholder="Servings"
         required
+        type="number"
       />
       <input
         name="imageUrl"
@@ -107,14 +133,14 @@ function RecipeForm({ onSuccess, editingRecipe, setEditingRecipe }) {
         name="ingredients"
         value={form.ingredients}
         onChange={handleChange}
-        placeholder="Ingredients (one per line)"
+        placeholder="Ingredients (one block of text)"
         required
       />
       <textarea
         name="instructions"
         value={form.instructions}
         onChange={handleChange}
-        placeholder="Instructions (one per line)"
+        placeholder="Instructions (one block of text)"
         required
       />
       <button type="submit">{editingRecipe ? "Update" : "Create"}</button>

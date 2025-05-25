@@ -20,7 +20,7 @@ function App() {
         <Route path="/recipes/:id" element={<RecipeDetails />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/register" element={<AdminRegister />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/create-recipe" element={<AdminDashboard />} />
       </Routes>
       <Footer />
     </Router>
