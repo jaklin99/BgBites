@@ -116,38 +116,31 @@ npm start
 
 🗂 Project Structure
 project-root/
-backend/
-├── build.gradle
-├── settings.gradle
-├── src/
-│ ├── main/
-│ │ ├── java/
-│ │ │ └── com/
-│ │ │ └── example/
-│ │ │ └── bgBites/
-│ │ │ ├── BgBitesApplication.java
-│ │ │ ├── controller/
-│ │ │ │ ├── RecipeController.java
-│ │ │ │ └── AdminRecipeController.java
-│ │ │ ├── entity/
-│ │ │ │ ├── Recipe.java
-│ │ │ │ └── Admin.java
-│ │ │ ├── repository/
-│ │ │ │ ├── RecipeRepository.java
-│ │ │ │ └── AdminRepository.java
-│ │ │ ├── security/
-│ │ │ │ ├── JwtFilter.java
-│ │ │ │ ├── JwtUtil.java
-│ │ │ │ ├── AdminDetailsService.java
-│ │ │ │ └── SecurityConfig.java
-│ │ │ └── auth/
-│ │ │ ├── AuthController.java
-│ │ │ ├── AuthRequest.java
-│ │ │ └── AuthResponse.java
-│ └── resources/
-│ ├── application.properties
-│ └── static/
-└── .gitignore
+Backend/
+├── config/
+│ └── SecurityConfig.java // Spring Security config (Basic Auth + roles)
+│
+├── controllers/
+│ ├── RecipeController.java // Public + admin-only endpoints for recipes
+│ └── UserController.java // Admin-only user creation and updates
+│
+├── database/
+│ └── PasswordChangeRequest.java // DTO for password change request
+│
+├── models/
+│ ├── User.java // User entity with email, password, role, enabled
+│ ├── Role.java // Enum: ADMIN, USER
+│ └── Recipe.java // Recipe entity
+│
+├── repositories/
+│ ├── UserRepository.java // JpaRepository for User
+│ └── RecipeRepository.java // JpaRepository for Recipe
+│
+├── services/
+│ └── UserService.java // Handles user registration + password updates
+│
+└── BackendApplication.java // Main Spring Boot application class
+
 frontend/ # React frontend
 │ ├── public/
 │ ├── src/
@@ -165,3 +158,13 @@ README.md
 | Contact Form           | ✅         | ✅            |
 | Add/Edit/Delete Recipe | ❌         | ✅            |
 | Login/Logout           | ❌         | ✅ (optional) |
+
+| Method | Endpoint               | Access     | Description                     |
+| ------ | ---------------------- | ---------- | ------------------------------- |
+| GET    | `/recipes`             | Public     | List all recipes                |
+| GET    | `/recipes/{id}`        | Public     | View single recipe              |
+| POST   | `/recipes`             | Admin only | Create a recipe                 |
+| PUT    | `/recipes/{id}`        | Admin only | Update a recipe                 |
+| DELETE | `/recipes/{id}`        | Admin only | Delete a recipe                 |
+| POST   | `/users`               | Admin only | Create/register a user          |
+| PUT    | `/users/{id}/password` | Admin/user | Change password (with old pass) |

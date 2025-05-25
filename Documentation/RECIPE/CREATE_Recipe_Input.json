@@ -1,0 +1,10 @@
+{
+  "title": "Classic Lasagna",
+  "imageUrl": "https://example.com/images/lasagna.jpg",
+  "videoUrl": "https://youtube.com/lasagna-video",
+  "prepTime": "20 mins",
+  "cookTime": "45 mins",
+  "servings": 6,
+  "ingredients": "Lasagna noodles, ricotta, mozzarella, ground beef, marinara sauce",
+  "instructions": "1. Boil noodles. 2. Layer noodles and filling. 3. Bake for 45 mins."
+}
