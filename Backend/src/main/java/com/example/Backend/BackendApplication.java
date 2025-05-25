@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BackendApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("spring.main.lazy-initialization", "true"); //speeds up debugging
 		SpringApplication.run(BackendApplication.class, args);
 	}
 

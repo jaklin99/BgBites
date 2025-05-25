@@ -9,7 +9,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -24,13 +27,13 @@ public class User {
         this.id = id;
     }
 
-    // Getter and Setter for username
-    public String getUsername() {
-        return username;
+    // Getter and Setter for email
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     // Getter and Setter for password

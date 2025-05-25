@@ -2,15 +2,10 @@ package com.example.Backend.controllers;
 
 // models
 import com.example.Backend.models.Recipe;
-import com.example.Backend.models.User;
-import com.example.Backend.models.Role;
 // repos
 import com.example.Backend.repositories.RecipeRepository;
-import com.example.Backend.repositories.UserRepository;
-
-import org.springframework.security.core.Authentication;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,50 +17,33 @@ import java.util.List;
 public class RecipeController {
 
     @Autowired
-    private RecipeRepository repo;
-
-    @Autowired
-    private UserRepository userRepository;
+    private RecipeRepository recipeRepository;
 
     @GetMapping
-    public List<Recipe> getAll() {
-        return repo.findAll();
+    public List<Recipe> getAllRecipes() {
+        return recipeRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Recipe getById(@PathVariable Long id) {
-        return repo.findById(id).orElseThrow();
+    public ResponseEntity<Recipe> getRecipe(@PathVariable Long id) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow();
+        return ResponseEntity.ok(recipe);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Recipe recipe, Authentication authentication) {
-        if (!isAdmin(authentication)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only admins can create recipes.");
-        }
-        return ResponseEntity.ok(repo.save(recipe));
+    public Recipe createRecipe(@RequestBody Recipe recipe) {
+        return recipeRepository.save(recipe);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Recipe recipe, Authentication authentication) {
-        if (!isAdmin(authentication)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only admins can update recipes.");
-        }
+    public Recipe updateRecipe(@PathVariable Long id, @RequestBody Recipe recipe) {
         recipe.setId(id);
-        return ResponseEntity.ok(repo.save(recipe));
+        return recipeRepository.save(recipe);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id, Authentication authentication) {
-        if (!isAdmin(authentication)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only admins can delete recipes.");
-        }
-        repo.deleteById(id);
-        return ResponseEntity.ok().build();
-    }
-
-    private boolean isAdmin(Authentication authentication) {
-        String username = authentication.getName();
-        User user = userRepository.findByUsername(username).orElseThrow();
-        return user.getRole() == Role.ADMIN;
+    public void deleteRecipe(@PathVariable Long id) {
+        recipeRepository.deleteById(id);
     }
 }
