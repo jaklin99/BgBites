@@ -1,7 +1,6 @@
 package com.example.Backend.services;
 
 import com.example.Backend.repositories.UserRepository;
-import com.example.Backend.database.PasswordChangeRequest;
 import com.example.Backend.models.User;
 // import com.example.Backend.models.VerificationToken;
 import com.example.Backend.models.Role;
