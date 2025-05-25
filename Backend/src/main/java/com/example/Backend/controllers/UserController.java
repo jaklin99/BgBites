@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired
@@ -34,12 +34,12 @@ public class UserController {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-    
+
     @GetMapping("/admin-test")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> testAdmin() {
-    return ResponseEntity.ok("Admin access granted!");
-}
+        return ResponseEntity.ok("Admin access granted!");
+    }
 
 }
 // // Admin-only user creation using email
