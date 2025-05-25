@@ -66,7 +66,7 @@ This will launch the React app on http://localhost:3000
 #### 1. Requirements:
 
 1.1. Java 17+
-1.2. Maven
+1.2. Gradle
 1.3. MySQL server running
 1.4. phpMyAdmin (optional)
 
