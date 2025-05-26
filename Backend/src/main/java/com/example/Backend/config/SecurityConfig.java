@@ -40,20 +40,21 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/recipes/**").hasRole("ADMIN") // admin only
                         .requestMatchers(HttpMethod.PUT, "/recipes/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/recipes/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager(
-                User.withUsername("admin")
-                        .password(passwordEncoder().encode("a1234n")) // 👈 MATCHES your Postman
-                        .roles("ADMIN")
-                        .build());
-    }
+    // @Bean
+    // public UserDetailsService userDetailsService() {
+    // return new InMemoryUserDetailsManager(
+    // User.withUsername("admin")
+    // .password(passwordEncoder().encode("a1234n")) // 👈 MATCHES your Postman
+    // .roles("ADMIN")
+    // .build());
+    // }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -30,7 +30,6 @@ public class RecipeController {
         return ResponseEntity.ok(recipe);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Recipe createRecipe(@RequestBody Recipe recipe) {
         return recipeRepository.save(recipe);
