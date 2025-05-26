@@ -6,8 +6,10 @@ import RecipeDetails from "./components/RecipeDetails";
 import AdminLogin from "./components/AdminLogin";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import AdminRegister from "./components/AdminRegister";
+import NotFound from "./exceptions/NotFoundException";
 import AdminDashboard from "./components/AdminDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 import "./App.css";
 
 function App() {
@@ -19,8 +21,17 @@ function App() {
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/recipes/:id" element={<RecipeDetails />} />
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/register" element={<AdminRegister />} />
-        <Route path="/admin/create-recipe" element={<AdminDashboard />} />
+        <Route path="/create-recipe" element={<AdminDashboard />} />
+        <Route
+          path="/admin/create-recipe"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/404" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </Router>

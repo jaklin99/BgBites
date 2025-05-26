@@ -53,6 +53,8 @@ const Navbar = () => {
             </>
           ) : (
             <>
+              <Link to="/">Home</Link>
+              <Link to="/recipes">Recipes</Link>
               <Link to="/admin/create-recipe">Create Recipe</Link>
               <Link to="/admin/register">Register</Link>
               <Link to="/admin/create-user">Create User</Link>
@@ -65,11 +67,8 @@ const Navbar = () => {
       {!isAdmin && (
         <div className="navbar-right">
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-          <Link to="/signin" className="nav-auth-link">
+          <Link to="/signin" className="btn btn-signup">
             Sign in
-          </Link>
-          <Link to="/signup" className="btn btn-signup">
-            Sign up
           </Link>
         </div>
       )}
