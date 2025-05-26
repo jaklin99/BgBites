@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/recipes")
@@ -32,6 +33,10 @@ public class RecipeController {
 
     @PostMapping
     public Recipe createRecipe(@RequestBody Recipe recipe) {
+        Optional<Recipe> existing = recipeRepository.findByTitle(recipe.getTitle());
+        if (existing.isPresent()) {
+            throw new IllegalArgumentException("A recipe with that title already exists.");
+        }
         return recipeRepository.save(recipe);
     }
 
