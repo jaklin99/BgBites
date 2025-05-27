@@ -1,6 +1,11 @@
 package com.example.Backend.models;
 
 import lombok.Data;
+
+import com.example.Backend.enums.DietType;
+import com.example.Backend.enums.MealType;
+import com.example.Backend.enums.RecipeCategory;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +21,18 @@ public class Recipe {
     private String prepTime;
     private String cookTime;
     private int servings;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category")
+    private RecipeCategory category;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "diet_type")
+    private DietType dietType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "meal_type")
+    private MealType mealType;
 
     @Lob
     private String ingredients;
@@ -103,4 +120,29 @@ public class Recipe {
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
+
+    public MealType getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(MealType mealType) {
+        this.mealType = mealType;
+    }
+
+    public DietType getDietType() {
+        return dietType;
+    }
+
+    public void setDietType(DietType dietType) {
+        this.dietType = dietType;
+    }
+
+    public RecipeCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(RecipeCategory category) {
+        this.category = category;
+    }
+
 }
