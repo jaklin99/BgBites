@@ -28,24 +28,42 @@ public class RecipeController {
 
     @GetMapping("/filtered")
     public List<Recipe> getFilteredRecipes(
-            @RequestParam(required = false) RecipeCategory category,
-            @RequestParam(required = false) MealType mealType,
-            @RequestParam(required = false) DietType dietType) {
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String mealType,
+            @RequestParam(required = false) String dietType) {
 
-        if (category != null && mealType != null && dietType != null) {
-            return recipeRepository.findByCategoryAndMealTypeAndDietType(category, mealType, dietType);
-        } else if (category != null && mealType != null) {
-            return recipeRepository.findByCategoryAndMealType(category, mealType);
-        } else if (category != null && dietType != null) {
-            return recipeRepository.findByCategoryAndDietType(category, dietType);
-        } else if (mealType != null && dietType != null) {
-            return recipeRepository.findByMealTypeAndDietType(mealType, dietType);
-        } else if (category != null) {
-            return recipeRepository.findByCategory(category); // ✅ this one should work!
-        } else if (mealType != null) {
-            return recipeRepository.findByMealType(mealType);
-        } else if (dietType != null) {
-            return recipeRepository.findByDietType(dietType);
+        RecipeCategory cat = null;
+        MealType meal = null;
+        DietType diet = null;
+
+        try {
+            if (category != null) {
+                cat = RecipeCategory.valueOf(category.toUpperCase());
+            }
+            if (mealType != null) {
+                meal = MealType.valueOf(mealType.toUpperCase());
+            }
+            if (dietType != null) {
+                diet = DietType.valueOf(dietType.toUpperCase());
+            }
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid filter value. Use valid enum names.");
+        }
+
+        if (cat != null && meal != null && diet != null) {
+            return recipeRepository.findByCategoryAndMealTypeAndDietType(cat, meal, diet);
+        } else if (cat != null && meal != null) {
+            return recipeRepository.findByCategoryAndMealType(cat, meal);
+        } else if (cat != null && diet != null) {
+            return recipeRepository.findByCategoryAndDietType(cat, diet);
+        } else if (meal != null && diet != null) {
+            return recipeRepository.findByMealTypeAndDietType(meal, diet);
+        } else if (cat != null) {
+            return recipeRepository.findByCategory(cat);
+        } else if (meal != null) {
+            return recipeRepository.findByMealType(meal);
+        } else if (diet != null) {
+            return recipeRepository.findByDietType(diet);
         } else {
             return recipeRepository.findAll();
         }
