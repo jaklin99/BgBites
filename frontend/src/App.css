@@ -266,7 +266,6 @@ body {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: white;
   border: none;
   border-radius: 50%;
   padding: 8px;
@@ -275,7 +274,7 @@ body {
 }
 
 .favorite-icon svg {
-  color: #f4a261; /* yellow/orange */
+  color: #ff4c3fff; 
   font-size: 18px;
   cursor: pointer;
   transition: color 0.3s;
@@ -284,12 +283,6 @@ body {
   color: red;
 }
 
-/* Recipe Details */
-.recipe-page {
-  font-family: sans-serif;
-  padding-bottom: 60px; /* Space for bottom nav */
-}
-
 /* Recipe Page Container */
 .recipe-page {
   font-family: sans-serif;
@@ -301,25 +294,7 @@ body {
 
 /* Card wrapper */
 .recipe-card {
-  width: 60%; /* card takes 50% of screen */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px; /* spacing between sections */
-}
-
-/* Recipe Page Container */
-.recipe-page {
-  font-family: sans-serif;
-  padding-bottom: 60px; /* Space for bottom nav */
-  display: flex;
-  justify-content: center; /* center the card horizontally */
-  padding-top: 20px;
-}
-
-/* Card wrapper */
-.recipe-card {
-  width: 50%; /* card takes 50% of screen */
+  width: 80%; /* card takes 50% of screen */
   display: flex;
   flex-direction: column;
   align-items: center;
