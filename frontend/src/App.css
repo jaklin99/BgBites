@@ -364,15 +364,6 @@ body {
   width: 100%;
 }
 
-.favorite-icon {
-  cursor: pointer;
-  color: gray;
-  transition: color 0.3s;
-}
-.favorite-icon.active {
-  color: red;
-}
-
 /* Tabs */
 .tab-switcher {
   display: flex;
