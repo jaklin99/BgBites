@@ -227,8 +227,8 @@ body {
   padding: 2rem;
 }
 
-.category-buttons{
-  margin: 50px
+.category-buttons {
+  margin: 50px;
 }
 .category-btn {
   background-color: #e8f5e9;
@@ -277,8 +277,177 @@ body {
 .favorite-icon svg {
   color: #f4a261; /* yellow/orange */
   font-size: 18px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.favorite-icon.active {
+  color: red;
 }
 
+/* Recipe Details */
+.recipe-page {
+  font-family: sans-serif;
+  padding-bottom: 60px; /* Space for bottom nav */
+}
+
+/* Recipe Page Container */
+.recipe-page {
+  font-family: sans-serif;
+  padding-bottom: 60px; /* Space for bottom nav */
+  display: flex;
+  justify-content: center; /* center the card horizontally */
+  padding-top: 20px;
+}
+
+/* Card wrapper */
+.recipe-card {
+  width: 60%; /* card takes 50% of screen */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* spacing between sections */
+}
+
+/* Recipe Page Container */
+.recipe-page {
+  font-family: sans-serif;
+  padding-bottom: 60px; /* Space for bottom nav */
+  display: flex;
+  justify-content: center; /* center the card horizontally */
+  padding-top: 20px;
+}
+
+/* Card wrapper */
+.recipe-card {
+  width: 50%; /* card takes 50% of screen */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* spacing between sections */
+}
+
+/* Image + title */
+.recipe-image-container {
+  position: relative;
+  width: 100%;
+  height: 300px; /* fixed height for carousel */
+  border-radius: 20px 20px 0 0;
+  overflow: hidden; /* prevent overflow when images are bigger */
+  margin: 0 auto;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* makes image fill container without distortion */
+}
+
+/* Carousel controls */
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  padding: 0 10px;
+  pointer-events: none;
+}
+.carousel-arrow {
+  pointer-events: auto;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.carousel-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Recipe title overlay */
+.recipe-title {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #a4c3b2;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Meta section */
+.recipe-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.favorite-icon {
+  cursor: pointer;
+  color: gray;
+  transition: color 0.3s;
+}
+.favorite-icon.active {
+  color: red;
+}
+
+/* Tabs */
+.tab-switcher {
+  display: flex;
+  margin: 0 0; /* handled by card width */
+  width: 80%;
+}
+.tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #e0e0e0;
+  border-radius: 0;
+  transition: background-color 0.3s;
+}
+.tab:first-child {
+  border-radius: 12px 0 0 12px;
+}
+.tab:last-child {
+  border-radius: 0 12px 12px 0;
+}
+.tab.active {
+  background-color: #a4c3b2;
+}
+
+/* Tab content */
+.tab-content {
+  background-color: #a4c3b2; /* updated background */
+  border-radius: 12px;
+  margin: 10px 0;
+  padding: 15px;
+  width: 80%;
+  min-height: 150px;
+  box-sizing: border-box;
+}
+
+/* Bottom nav */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  background-color: #c4e6ae;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-weight: bold;
+}
 
 /* Contact Form */
 #contact {
