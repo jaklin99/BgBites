@@ -142,9 +142,9 @@ body {
 }
 
 .hero-text h1 {
-  font-size: 2.5rem;
+  font-size: 2.0rem;
   font-weight: bold;
-  color: var(--primary-color);
+  color: var(-- --text-color);
 }
 
 /* Cards Section */
@@ -837,6 +837,10 @@ body.dark .hero-section {
   background-image: var(--hero-dark);
   background-color: #1e1e1e;
   color: #f1f1f1;
+}
+/* Dark Mode Hero */
+body.dark .hero-text {
+  background-color: #2a3e35ad;
 }
 
 /* NAVBAR DARK/LIGHT theme */
