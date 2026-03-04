@@ -1,91 +1,7 @@
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import axios from "axios";
-// import "../App.css";
-
-// function RecipeDetails() {
-//   const { id } = useParams();
-//   const [recipe, setRecipe] = useState(null);
-
-//   useEffect(() => {
-//     axios
-//       .get(`http://localhost:8080//recipes/${id}`)
-//       .then((response) => setRecipe(response.data))
-//       .catch((error) => console.error("Error:", error));
-//   }, [id]);
-
-//   if (!recipe) return <p>Loading...</p>;
-
-//   return (
-//     <div className="recipe-detail">
-//       <h2>{recipe.title}</h2>
-//       <img src={recipe.imageUrl} alt={recipe.title} />
-//       <p>
-//         <strong>Prep:</strong> {recipe.prepTime} mins | <strong>Cook:</strong>{" "}
-//         {recipe.cookTime} mins | <strong>Servings:</strong> {recipe.servings}
-//       </p>
-//       <h4>Ingredients</h4>
-//       <ul>
-//         {recipe.ingredients.map((i, idx) => (
-//           <li key={idx}>{i}</li>
-//         ))}
-//       </ul>
-//       <h4>Instructions</h4>
-//       <ol>
-//         {recipe.instructions.map((s, idx) => (
-//           <li key={idx}>{s}</li>
-//         ))}
-//       </ol>
-//       {recipe.videoUrl && <video controls src={recipe.videoUrl} width="100%" />}
-//     </div>
-//   );
-// }
-
-// export default RecipeDetails;
-
-// // import React, { useEffect, useState } from "react";
-// // import { useParams } from "react-router-dom";
-// // import axios from "axios";
-// // import "./App.css";
-
-// // function RecipeDetail() {
-// //   const { id } = useParams();
-// //   const [recipe, setRecipe] = useState(null);
-
-// //   useEffect(() => {
-// //     axios.get(`http://localhost:8080/recipes/${id}`)
-// //       .then(res => setRecipe(res.data))
-// //       .catch(err => console.error("Error:", err));
-// //   }, [id]);
-
-// //   if (!recipe) return <p>Loading...</p>;
-
-// //   return (
-// //     <div className="recipe-detail">
-// //       <h2>{recipe.title}</h2>
-// //       <img src={recipe.imageUrl} alt={recipe.title} className="detail-img" />
-// //       <div className="detail-meta">
-// //         <p><strong>Prep:</strong> {recipe.prepTime}</p>
-// //         <p><strong>Cook:</strong> {recipe.cookTime}</p>
-// //         <p><strong>Servings:</strong> {recipe.servings}</p>
-// //       </div>
-// //       <div className="detail-section">
-// //         <h3>Ingredients</h3>
-// //         <p>{recipe.ingredients}</p>
-// //         <h3>Instructions</h3>
-// //         <p>{recipe.instructions}</p>
-// //       </div>
-// //     </div>
-// //   );
-// // }
-
-// // export default RecipeDetail;
-
-
-
-
-import React, { useState } from "react";
-import "../App.css"; // Your main CSS file
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+// import axios from "axios"; // 🔒 BACKEND DISABLED
+import "../App.css";
 import {
   FaClock,
   FaHeart,
@@ -93,61 +9,128 @@ import {
   FaChevronRight,
 } from "react-icons/fa";
 
-function RecipePage() {
+function RecipeDetails() {
+  const { id } = useParams(); // ✅ get id from URL
+  const recipeId = parseInt(id);
+
   const [activeTab, setActiveTab] = useState("instructions");
   const [isFavorite, setIsFavorite] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
+  const [recipe, setRecipe] = useState(null);
 
-  // Dummy data with multiple images
-  const recipe = {
-    title: "Creamy Mushroom Pasta",
-    prepTime: 15,
-    images: [
-      "https://images.unsplash.com/photo-1525755662778-989d0524087e",
-      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
-      "https://images.unsplash.com/photo-1589308078050-83d4c3c25f8e",
-    ],
-    instructions: ["Tralala", "Step 2 instructions", "Step 3 instructions"],
-    ingredients: [
-      "Chicken",
-      "Lettuce",
-      "Croutons",
-      "Parmesan",
-      "Caesar dressing",
-    ],
-  };
+  /* -----------------------------
+     HARDCODED RECIPES
+  ------------------------------*/
+  const hardcodedRecipes = [
+    {
+      id: 1,
+      title: "Avocado Toast",
+      prepTime: 10,
+      images: ["https://images.unsplash.com/photo-1551183053-bf91a1d81141"],
+      ingredients: ["Avocado", "Bread", "Salt", "Pepper"],
+      instructions: [
+        "Toast the bread",
+        "Mash the avocado",
+        "Spread on toast",
+        "Season and serve",
+      ],
+    },
+    {
+      id: 2,
+      title: "Grilled Chicken",
+      prepTime: 35,
+      images: ["https://images.unsplash.com/photo-1604908176997-431f3b96e95c"],
+      ingredients: ["Chicken breast", "Olive oil", "Spices"],
+      instructions: [
+        "Season chicken",
+        "Heat grill",
+        "Grill 6-7 minutes per side",
+        "Rest and serve",
+      ],
+    },
+    {
+      id: 3,
+      title: "Pancakes",
+      prepTime: 25,
+      images: ["https://images.unsplash.com/photo-1495214783159-3503fd1b572d"],
+      ingredients: ["Flour", "Eggs", "Milk", "Sugar"],
+      instructions: [
+        "Mix ingredients",
+        "Heat pan",
+        "Pour batter",
+        "Flip and cook",
+      ],
+    },
+    {
+      id: 4,
+      title: "Chocolate Cake",
+      prepTime: 50,
+      images: ["https://images.unsplash.com/photo-1578985545062-69928b1d9587"],
+      ingredients: ["Flour", "Cocoa", "Eggs", "Sugar", "Butter"],
+      instructions: [
+        "Mix dry ingredients",
+        "Add wet ingredients",
+        "Bake at 180°C for 35 min",
+        "Let cool and serve",
+      ],
+    },
+  ];
 
-  // Navigate carousel
+  /* -----------------------------
+     LOAD RECIPE BY ID
+  ------------------------------*/
+  useEffect(() => {
+    const selectedRecipe = hardcodedRecipes.find((r) => r.id === recipeId);
+
+    setRecipe(selectedRecipe);
+
+    /* ---------- BACKEND VERSION ----------
+    axios
+      .get(`http://localhost:8080/recipes/${id}`)
+      .then((res) => setRecipe(res.data))
+      .catch((err) => console.error("Error:", err));
+    ---------------------------------------- */
+  }, [recipeId]);
+
+  if (!recipe) return <p style={{ padding: "2rem" }}>Recipe not found.</p>;
+
+  /* -----------------------------
+     IMAGE NAVIGATION
+  ------------------------------*/
   const prevImage = () => {
     setActiveImage((prev) =>
-      prev === 0 ? recipe.images.length - 1 : prev - 1
+      prev === 0 ? recipe.images.length - 1 : prev - 1,
     );
   };
 
   const nextImage = () => {
     setActiveImage((prev) =>
-      prev === recipe.images.length - 1 ? 0 : prev + 1
+      prev === recipe.images.length - 1 ? 0 : prev + 1,
     );
   };
 
   return (
     <div className="recipe-page">
       <div className="recipe-card">
-        {/* Image carousel */}
+        {/* IMAGE */}
         <div className="recipe-image-container">
           <img
             src={recipe.images[activeImage]}
-            alt={`${recipe.title} ${activeImage + 1}`}
+            alt={recipe.title}
             className="recipe-image"
           />
-          <div className="carousel-controls">
-            <FaChevronLeft className="carousel-arrow" onClick={prevImage} />
-            <FaChevronRight className="carousel-arrow" onClick={nextImage} />
-          </div>
+
+          {recipe.images.length > 1 && (
+            <div className="carousel-controls">
+              <FaChevronLeft className="carousel-arrow" onClick={prevImage} />
+              <FaChevronRight className="carousel-arrow" onClick={nextImage} />
+            </div>
+          )}
+
           <div className="recipe-title">{recipe.title}</div>
         </div>
 
-        {/* Meta */}
+        {/* META */}
         <div className="recipe-meta">
           <div className="prep-time">
             <FaClock /> Prep Time: {recipe.prepTime} mins
@@ -158,7 +141,7 @@ function RecipePage() {
           />
         </div>
 
-        {/* Tabs */}
+        {/* TABS */}
         <div className="tab-switcher">
           <button
             className={activeTab === "instructions" ? "tab active" : "tab"}
@@ -166,6 +149,7 @@ function RecipePage() {
           >
             Instructions
           </button>
+
           <button
             className={activeTab === "ingredients" ? "tab active" : "tab"}
             onClick={() => setActiveTab("ingredients")}
@@ -174,7 +158,7 @@ function RecipePage() {
           </button>
         </div>
 
-        {/* Tab content */}
+        {/* CONTENT */}
         <div className="tab-content">
           {activeTab === "instructions" ? (
             <ol>
@@ -195,4 +179,4 @@ function RecipePage() {
   );
 }
 
-export default RecipePage;
+export default RecipeDetails;
