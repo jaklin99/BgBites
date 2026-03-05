@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #6b9080; /* Deep greenish base */
+  --primary-color: #506d60; /* Deep greenish base */
   --secondary-color: #a4c3b2; /* Soft sage */
   --accent-color: #cce3de; /* Muted mint */
   --card-bg: #eaf4f4; /* Pale aqua for backgrounds */
@@ -129,7 +129,9 @@ body {
   background-image: var(--hero-light);
   background-color: var(--card-bg);
   border-radius: 50px;
-  transition: background-image 0.4s ease-in-out, background-color 0.3s;
+  transition:
+    background-image 0.4s ease-in-out,
+    background-color 0.3s;
 }
 
 .hero-text {
@@ -142,7 +144,7 @@ body {
 }
 
 .hero-text h1 {
-  font-size: 2.0rem;
+  font-size: 2rem;
   font-weight: bold;
   color: var(-- --text-color);
 }
@@ -274,7 +276,7 @@ body {
 }
 
 .favorite-icon svg {
-  color: #ff4c3fff; 
+  color: #ff4c3fff;
   font-size: 18px;
   cursor: pointer;
   transition: color 0.3s;
@@ -302,56 +304,54 @@ body {
 }
 
 /* Image + title */
+/* Image container */
 .recipe-image-container {
   position: relative;
   width: 100%;
-  height: 300px; /* fixed height for carousel */
   border-radius: 20px 20px 0 0;
-  overflow: hidden; /* prevent overflow when images are bigger */
-  margin: 0 auto;
+  overflow: hidden;
 }
 
+/* Image */
 .recipe-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* makes image fill container without distortion */
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 /* Carousel controls */
 .carousel-controls {
   position: absolute;
   top: 50%;
+  left: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
   padding: 0 10px;
-  pointer-events: none;
-}
-.carousel-arrow {
-  pointer-events: auto;
-  background-color: rgba(255, 255, 255, 0.6);
-  padding: 8px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-.carousel-arrow:hover {
-  background-color: rgba(255, 255, 255, 0.9);
 }
 
+.carousel-arrow {
+  background: rgba(255,255,255,0.8);
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.carousel-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+}
 /* Recipe title overlay */
 .recipe-title {
   position: absolute;
-  bottom: 10px;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #a4c3b2;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
+  background: #6b9080b7;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 600;
 }
 
 /* Meta section */
@@ -589,7 +589,9 @@ body {
   padding-top: 3rem;
   padding-bottom: 2rem;
   border-top: 1px solid var(--accent-color);
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 .footer-content {
@@ -683,7 +685,9 @@ body {
   width: 24px;
   border-radius: 50%;
   background-color: var(--primary-color); /* default switch knob */
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
   position: absolute;
   top: 3px;
   left: 3px;
@@ -698,14 +702,18 @@ body {
 body.light {
   background-color: var(--light-bg); /* F6FFF8 */
   color: var(--text-color); /* #1b3c35 */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Dark Theme */
 body.dark {
   background-color: #1c2c25; /* rich forest green background */
   color: #f1f1f1;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Navbar adaptive theme */
@@ -714,7 +722,9 @@ body.dark {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 body.light .navbar {
@@ -771,7 +781,9 @@ body.light a {
 /* === BUTTONS === */
 button,
 .btn {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 body.light .btn-dark,
@@ -796,7 +808,9 @@ select {
   border-radius: 6px;
   padding: 0.5rem;
   font-family: var(--font-family);
-  transition: border-color 0.3s, background-color 0.3s;
+  transition:
+    border-color 0.3s,
+    background-color 0.3s;
 }
 
 input:focus,
