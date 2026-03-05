@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import HeroSection from "./HeroSection.js";
-import RecipeCard from "./RecipeCard.js";
 // import axios from "axios";   // 🔒 TEMPORARILY DISABLED
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 function Home() {
   const navigate = useNavigate();
@@ -54,36 +54,25 @@ function Home() {
   ------------------------------*/
 
   const [recipes, setRecipes] = useState(dummyRecipes);
-  const [categories, setCategories] = useState(dummyCategories);
+  const [categories] = useState(dummyCategories);
   const [activeCategory, setActiveCategory] = useState("ALL");
+  const [favorites, setFavorites] = useState([]);
 
   /* -----------------------------
-     BACKEND FETCH (COMMENTED)
+     FAVORITE TOGGLE
   ------------------------------*/
 
-  /*
-  useEffect(() => {
-    fetchRecipes();
-    fetchCategories();
-  }, []);
+  const toggleFavorite = (e, id) => {
+    e.stopPropagation();
+    e.preventDefault();
 
-  const fetchRecipes = () => {
-    axios
-      .get("http://localhost:8080/recipes")
-      .then((res) => setRecipes(res.data))
-      .catch((err) => console.error("Failed to fetch recipes", err));
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id],
+    );
   };
-
-  const fetchCategories = () => {
-    axios
-      .get("http://localhost:8080/recipes/categories")
-      .then((res) => setCategories(res.data))
-      .catch((err) => console.error("Failed to fetch categories", err));
-  };
-  */
 
   /* -----------------------------
-     FILTER LOGIC (LOCAL)
+     FILTER
   ------------------------------*/
 
   const filterRecipes = (category) => {
@@ -97,17 +86,6 @@ function Home() {
       );
       setRecipes(filtered);
     }
-
-    /* ---------- BACKEND VERSION ----------
-    if (category === "ALL") {
-      fetchRecipes();
-    } else {
-      axios
-        .get(`http://localhost:8080/recipes/filtered?category=${category}`)
-        .then((res) => setRecipes(res.data))
-        .catch((err) => console.error("Failed to filter recipes", err));
-    }
-    ---------------------------------------- */
   };
 
   const visibleRecipes = recipes.slice(0, 12);
@@ -138,10 +116,36 @@ function Home() {
         ))}
       </section>
 
-      {/* RECIPES */}
+      {/* RECIPE CARDS */}
       <section className="recipe-grid">
         {visibleRecipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
+          <Link
+            key={recipe.id}
+            to={`/recipes/${recipe.id}`}
+            className="recipe-card-link"
+          >
+            <div className="recipe-card">
+              <div className="recipe-image-wrapper">
+                <img src={recipe.image} alt={recipe.title} />
+
+                <button
+                  className="favorite-icon"
+                  onClick={(e) => toggleFavorite(e, recipe.id)}
+                >
+                  {favorites.includes(recipe.id) ? <FaHeart /> : <FaRegHeart />}
+                </button>
+              </div>
+
+              <div className="recipe-card-content">
+                <h3>{recipe.title}</h3>
+
+                <div className="recipe-meta">
+                  <span>🍽 {recipe.servings}</span>
+                  <span>⏱ {recipe.time}</span>
+                </div>
+              </div>
+            </div>
+          </Link>
         ))}
       </section>
 
