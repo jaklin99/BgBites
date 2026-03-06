@@ -64,7 +64,7 @@ function AdminDashboard() {
   ]);
 
   const handleSuccess = (recipeTitle) => {
-    setSuccessMessage(`✅ Recipe "${recipeTitle}" was successfully created!`);
+    setSuccessMessage(`Recipe "${recipeTitle}" was successfully created!`);
 
     setTimeout(() => setSuccessMessage(""), 4000);
     setEditingRecipe(null);
@@ -80,8 +80,6 @@ function AdminDashboard() {
 
   return (
     <div className="admin-dashboard">
-      <h2>Admin Dashboard</h2>
-
       {successMessage && <div className="success-banner">{successMessage}</div>}
 
       <div className="admin-layout">

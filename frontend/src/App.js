@@ -23,11 +23,12 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/create-recipe" element={<AdminDashboard />} />
         <Route
-          path="/admin/create-recipe"
+          path="/admin/recipes"
           element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
+            <AdminDashboard />
+            // <ProtectedRoute>
+            //   <AdminDashboard />
+            // </ProtectedRoute>
           }
         />
         <Route path="/404" element={<NotFound />} />
