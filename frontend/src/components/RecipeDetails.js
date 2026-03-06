@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import axios from "axios"; // 🔒 BACKEND DISABLED
+// import axios from "axios"; // BACKEND DISABLED
 import "../App.css";
 import {
   FaClock,
@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 
 function RecipeDetails() {
-  const { id } = useParams(); // ✅ get id from URL
+  const { id } = useParams();
   const recipeId = parseInt(id);
 
   const [activeTab, setActiveTab] = useState("instructions");
@@ -61,42 +61,22 @@ function RecipeDetails() {
         "Flip and cook",
       ],
     },
-    {
-      id: 4,
-      title: "Chocolate Cake",
-      prepTime: 50,
-      images: ["https://images.unsplash.com/photo-1578985545062-69928b1d9587"],
-      ingredients: ["Flour", "Cocoa", "Eggs", "Sugar", "Butter"],
-      instructions: [
-        "Mix dry ingredients",
-        "Add wet ingredients",
-        "Bake at 180°C for 35 min",
-        "Let cool and serve",
-      ],
-    },
   ];
 
-  /* -----------------------------
-     LOAD RECIPE BY ID
-  ------------------------------*/
   useEffect(() => {
     const selectedRecipe = hardcodedRecipes.find((r) => r.id === recipeId);
-
     setRecipe(selectedRecipe);
 
-    /* ---------- BACKEND VERSION ----------
+    /*
     axios
       .get(`http://localhost:8080/recipes/${id}`)
       .then((res) => setRecipe(res.data))
-      .catch((err) => console.error("Error:", err));
-    ---------------------------------------- */
+      .catch((err) => console.error(err));
+    */
   }, [recipeId]);
 
-  if (!recipe) return <p style={{ padding: "2rem" }}>Recipe not found.</p>;
+  if (!recipe) return <p>Recipe not found.</p>;
 
-  /* -----------------------------
-     IMAGE NAVIGATION
-  ------------------------------*/
   const prevImage = () => {
     setActiveImage((prev) =>
       prev === 0 ? recipe.images.length - 1 : prev - 1,
@@ -110,39 +90,46 @@ function RecipeDetails() {
   };
 
   return (
-    <div className="recipe-page">
-      <div className="recipe-card">
+    <div className="recipe-detail-page">
+      <div className="recipe-detail-card">
         {/* IMAGE */}
-        <div className="recipe-image-container">
+        <div className="recipe-detail-image-container">
           <img
             src={recipe.images[activeImage]}
             alt={recipe.title}
-            className="recipe-image"
+            className="recipe-detail-image"
           />
 
           {recipe.images.length > 1 && (
-            <div className="carousel-controls">
-              <FaChevronLeft className="carousel-arrow" onClick={prevImage} />
-              <FaChevronRight className="carousel-arrow" onClick={nextImage} />
+            <div className="recipe-detail-carousel">
+              <FaChevronLeft
+                className="recipe-detail-arrow"
+                onClick={prevImage}
+              />
+              <FaChevronRight
+                className="recipe-detail-arrow"
+                onClick={nextImage}
+              />
             </div>
           )}
-
-          <div className="recipe-title">{recipe.title}</div>
         </div>
 
+        {/* TITLE */}
+        <h1 className="recipe-detail-title">{recipe.title}</h1>
+
         {/* META */}
-        <div className="recipe-meta">
-          <div className="prep-time">
+        <div className="recipe-detail-meta">
+          <div>
             <FaClock /> Prep Time: {recipe.prepTime} mins
           </div>
           <FaHeart
-            className={`favorite-icon ${isFavorite ? "active" : ""}`}
+            className={`recipe-detail-fav ${isFavorite ? "active" : ""}`}
             onClick={() => setIsFavorite(!isFavorite)}
-          />
+          />               
         </div>
 
         {/* TABS */}
-        <div className="tab-switcher">
+        <div className="recipe-detail-tabs">
           <button
             className={activeTab === "instructions" ? "tab active" : "tab"}
             onClick={() => setActiveTab("instructions")}
@@ -159,7 +146,7 @@ function RecipeDetails() {
         </div>
 
         {/* CONTENT */}
-        <div className="tab-content">
+        <div className="recipe-detail-content">
           {activeTab === "instructions" ? (
             <ol>
               {recipe.instructions.map((step, idx) => (
