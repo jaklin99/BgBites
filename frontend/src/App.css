@@ -20,36 +20,39 @@ body {
 }
 
 /* Navbar */
+/* NAVBAR CONTAINER */
 .navbar {
-  background-color: var(--secondary-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  font-size: 1rem;
+  background-color: var(--secondary-color);
+  padding: 0.8rem 2rem;
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 
+/* LEFT SIDE */
 .navbar-left {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
 
-.navbar-logo {
+/* LOGO */
+.navbar-logo a {
   font-size: 1.5rem;
   font-weight: 600;
-  font-family: "Segoe UI", sans-serif;
+  text-decoration: none;
   color: var(--primary-color);
-  padding-left: 15px;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
+/* NAV LINKS */
 .navbar-links {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
 }
 
@@ -63,54 +66,85 @@ body {
   color: var(--primary-color);
 }
 
+/* SEARCH */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-form input {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+}
+
+.nav-search {
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+/* RIGHT SIDE */
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
-.navbar-search {
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--accent-color);
-  border-radius: 999px;
-  padding: 0.4rem 1rem;
-  background-color: var(--card-bg);
-}
-
-.navbar-search input {
-  border: none;
-  outline: none;
-  padding: 0.4rem;
-  width: 120px;
-  background-color: transparent;
-  color: var(--text-color);
-}
-
-.search-icon {
-  margin-right: 0.5rem;
-  color: var(--primary-color);
-}
-
-.nav-auth-link {
-  text-decoration: none;
-  color: var(--text-color);
-  font-weight: 500;
-}
-
+/* SIGN IN BUTTON */
 .btn-signup {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
   text-decoration: none;
   font-weight: 500;
-  transition: background-color 0.3s ease;
 }
 
 .btn-signup:hover {
-  background-color: var(--accent-color);
-  color: var(--text-color);
+  color: var(--primary-color);
+}
+
+/* HAMBURGER MENU */
+.menu-icon {
+  display: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+/* -------------------- */
+/* MOBILE RESPONSIVE */
+/* -------------------- */
+
+@media (max-width: 900px) {
+
+  .menu-icon {
+    display: block;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: var(--secondary-color);
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 0;
+    gap: 1.2rem;
+
+    display: none;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .search-form {
+    flex-direction: column;
+  }
+
+  .navbar-right {
+    gap: 0.6rem;
+  }
 }
 
 /* Hero Section */
@@ -146,7 +180,38 @@ body {
 .hero-text h1 {
   font-size: 2rem;
   font-weight: bold;
-  color: var(-- --text-color);
+  color: var(--text-color);
+}
+/* HERO RESPONSIVENESS */
+/* Tablet */
+@media (max-width: 900px) {
+  .hero-section {
+    min-height: 420px;
+    padding: 1.5rem;
+    border-radius: 30px;
+  }
+
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .hero-section {
+    min-height: 320px;
+    padding: 1rem;
+    border-radius: 20px;
+    background-position: center 30%;
+  }
+
+  .hero-text {
+    padding: 1rem 1.2rem;
+  }
+
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
 }
 
 /* Cards Section */

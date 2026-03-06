@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import ThemeToggle from "./ThemeToggle"; // adjust path as needed
+import ThemeToggle from "./ThemeToggle";
 import "../App.css";
 import { Form, FormControl, Button } from "react-bootstrap";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith("/admin");
 
   const [theme, setTheme] = useState("light");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("theme");
     const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)",
     ).matches;
     const initialTheme = stored || (prefersDark ? "dark" : "light");
+
     setTheme(initialTheme);
     document.body.className = initialTheme;
   }, []);
@@ -26,27 +29,40 @@ const Navbar = () => {
     localStorage.setItem("theme", newTheme);
     document.body.className = newTheme;
   };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <div className="navbar-logo">BG Bites</div>
-        <div className="navbar-links">
+        <div className="navbar-logo">
+          <Link to="/">BG Bites</Link>
+        </div>
+
+        {/* Hamburger */}
+        <div className="menu-icon" onClick={toggleMenu}>
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </div>
+
+        <div className={`navbar-links ${menuOpen ? "active" : ""}`}>
           {!isAdmin ? (
             <>
-              <Link to="/" className="btn btn-signup">
+              <Link to="/" onClick={() => setMenuOpen(false)}>
                 Home
               </Link>
-              <Link to="/recipes" className="btn btn-signup">
+              <Link to="/recipes" onClick={() => setMenuOpen(false)}>
                 Recipes
               </Link>
+
               <Form className="d-flex search-form">
                 <FormControl
                   type="search"
                   placeholder="Search recipes"
                   className="me-2"
-                  aria-label="Search"
                 />
-                <Button variant="dark" className="search-btn">
+                <Button variant="dark" className="nav-search">
                   Search
                 </Button>
               </Form>
@@ -67,7 +83,7 @@ const Navbar = () => {
       {!isAdmin && (
         <div className="navbar-right">
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-          <Link to="/signin" className="btn btn-signup">
+          <Link to="/signin" className="btn-signup">
             Sign in
           </Link>
         </div>
