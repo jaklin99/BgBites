@@ -1,7 +1,6 @@
+// AdminLogin.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { setAuth } from "../api/auth";
 
 function AdminLogin() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -9,31 +8,51 @@ function AdminLogin() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Dummy admin credentials
+  const dummyAdmin = { email: "admin@example.com", password: "password123" };
+  const dummyRecipes = [
+    {
+      id: 1,
+      title: "Spaghetti Bolognese",
+      ingredients: ["pasta", "tomato", "beef"],
+    },
+    {
+      id: 2,
+      title: "Chicken Curry",
+      ingredients: ["chicken", "curry powder", "rice"],
+    },
+    {
+      id: 3,
+      title: "Chocolate Cake",
+      ingredients: ["chocolate", "flour", "sugar", "eggs"],
+    },
+  ];
+
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      await axios.get("http://localhost:8080/recipes", {
-        auth: {
-          username: credentials.email,
-          password: credentials.password,
-        },
-      });
+    // Check dummy credentials
+    if (
+      credentials.email === dummyAdmin.email &&
+      credentials.password === dummyAdmin.password
+    ) {
+      // Set admin as logged in
+      localStorage.setItem("adminLoggedIn", "true");
 
-      setAuth(credentials.email, credentials.password);
+      // Save dummy recipes in localStorage (or state for now)
+      localStorage.setItem("dummyRecipes", JSON.stringify(dummyRecipes));
+
       navigate("/admin");
-    } catch (err) {
+    } else {
       setError("Invalid email or password.");
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
+  const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
   return (
     <div className="form-container">
