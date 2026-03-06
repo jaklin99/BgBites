@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import NotFound from "./exceptions/NotFoundException";
 import AdminDashboard from "./components/AdminDashboard";
+import ContactPage from "./components/ContactPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import "./App.css";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/recipes/:id" element={<RecipeDetails />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/create-recipe" element={<AdminDashboard />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route
           path="/admin/recipes"
           element={
