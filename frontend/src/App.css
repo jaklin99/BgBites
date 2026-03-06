@@ -971,11 +971,9 @@ body {
   justify-content:center;
   align-items:center;
   padding:80px 20px;
-  background:#f9f9f9;
 }
 
 .contact-container{
-  background:white;
   padding:40px;
   border-radius:12px;
   width:100%;
@@ -989,7 +987,7 @@ body {
 }
 
 .contact-container p{
-  color:#666;
+  color:var(--text-color);
   margin-bottom:30px;
 }
 
@@ -999,41 +997,47 @@ body {
   gap:15px;
 }
 
-.contact-form input,
-.contact-form textarea{
-  padding:12px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  font-size:14px;
+.contact-input,
+.contact-textarea {
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 14px;
 }
 
 .contact-form textarea{
   resize:none;
 }
 
-.contact-form button{
-  background:#ff7a00;
-  color:white;
-  border:none;
-  padding:12px;
-  border-radius:8px;
-  font-size:15px;
-  cursor:pointer;
-  transition:0.2s;
+.contact-button {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: var(--accent-color);
+    color: black;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .contact-form button:hover{
-  background:#e66900;
+  background:var(--card-bg);
 }
 
 .success-popup{
-  margin-top:20px;
-  padding:12px;
-  background:#e7f8ec;
-  color:#1e7e34;
-  border-radius:8px;
-  font-size:14px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 14px 20px;
+    border-radius: 8px;
+    display: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
+
 
 /* Toggle design */
 .theme-toggle-wrapper {
@@ -1088,7 +1092,7 @@ body.dark {
 }
 
 /* Navbar adaptive theme */
-.navbar {
+/* .navbar {
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -1096,7 +1100,7 @@ body.dark {
   transition:
     background-color 0.3s,
     color 0.3s;
-}
+} */
 
 body.light .navbar {
   background-color: var(--secondary-color); /* A4C3B2 */
@@ -1120,7 +1124,7 @@ body.dark span,
 body.dark li,
 body.dark a,
 body.dark label {
-  color: #f1f1f1 !important;
+  color: var(--secondary-color) !important;
 }
 
 body.light h1,
@@ -1204,8 +1208,8 @@ body.light select {
 body.dark input,
 body.dark textarea,
 body.dark select {
-  background-color: #ffff; /* deeper forest tone */
-  color: #f1f1f1;
+  background-color: var(--card-bg); /* deeper forest tone */
+  color: var(--text-color);
   border-color: #5e7e75;
 }
 

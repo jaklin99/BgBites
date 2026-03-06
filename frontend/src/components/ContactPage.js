@@ -40,7 +40,7 @@ const ContactPage = () => {
     <div className="contact-page">
       <div className="contact-container">
         <h1>Contact Us</h1>
-        <p>Have a question or feedback? Send us a message!</p>
+        <p>Have a question or feedback?</p>
 
         <form className="contact-form" onSubmit={handleSubmit}>
           <input
