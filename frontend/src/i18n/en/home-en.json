@@ -1,0 +1,10 @@
+{
+  "all": "All",
+  "viewAllRecipes": "View All Recipes",
+  "categories": {
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "dessert": "Dessert"
+  }
+}

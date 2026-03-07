@@ -1,0 +1,10 @@
+{
+  "all": "Всички",
+  "viewAllRecipes": "Виж всички рецепти",
+  "categories": {
+    "breakfast": "Закуска",
+    "lunch": "Обяд",
+    "dinner": "Вечеря",
+    "dessert": "Десерт"
+  }
+}

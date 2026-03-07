@@ -1,0 +1,10 @@
+{
+  "all": "Alles",
+  "viewAllRecipes": "Bekijk alle recepten",
+  "categories": {
+    "breakfast": "Ontbijt",
+    "lunch": "Lunch",
+    "dinner": "Avonteten",
+    "dessert": "Nagerechten"
+  }
+}

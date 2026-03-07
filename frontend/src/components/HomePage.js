@@ -4,13 +4,11 @@ import HeroSection from "./HeroSection.js";
 // import axios from "axios";   // 🔒 TEMPORARILY DISABLED
 import { useNavigate, Link } from "react-router-dom";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 function Home() {
   const navigate = useNavigate();
-
-  /* -----------------------------
-     TEMPORARY HARDCODED DATA
-  ------------------------------*/
+  const { t } = useTranslation("home");
 
   const dummyCategories = ["BREAKFAST", "LUNCH", "DINNER", "DESSERT"];
 
@@ -49,18 +47,10 @@ function Home() {
     },
   ];
 
-  /* -----------------------------
-     STATE
-  ------------------------------*/
-
   const [recipes, setRecipes] = useState(dummyRecipes);
   const [categories] = useState(dummyCategories);
   const [activeCategory, setActiveCategory] = useState("ALL");
   const [favorites, setFavorites] = useState([]);
-
-  /* -----------------------------
-     FAVORITE TOGGLE
-  ------------------------------*/
 
   const toggleFavorite = (e, id) => {
     e.stopPropagation();
@@ -70,10 +60,6 @@ function Home() {
       prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id],
     );
   };
-
-  /* -----------------------------
-     FILTER
-  ------------------------------*/
 
   const filterRecipes = (category) => {
     setActiveCategory(category);
@@ -96,13 +82,12 @@ function Home() {
         <HeroSection />
       </section>
 
-      {/* CATEGORY BUTTONS */}
       <section className="category-buttons container">
         <button
           className={`category-btn ${activeCategory === "ALL" ? "active" : ""}`}
           onClick={() => filterRecipes("ALL")}
         >
-          All
+          {t("all")}
         </button>
 
         {categories.map((cat) => (
@@ -111,12 +96,11 @@ function Home() {
             className={`category-btn ${activeCategory === cat ? "active" : ""}`}
             onClick={() => filterRecipes(cat)}
           >
-            {cat}
+            {t(`categories.${cat.toLowerCase()}`)}
           </button>
         ))}
       </section>
 
-      {/* RECIPE CARDS */}
       <section className="recipe-grid">
         {visibleRecipes.map((recipe) => (
           <Link
@@ -152,7 +136,7 @@ function Home() {
       {recipes.length > 12 && (
         <div className="view-more-container">
           <button className="btn btn-dark" onClick={() => navigate("/recipes")}>
-            View All Recipes
+            {t("viewAllRecipes")}
           </button>
         </div>
       )}

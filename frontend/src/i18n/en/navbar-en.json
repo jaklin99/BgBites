@@ -1,0 +1,10 @@
+{
+  "home": "Home",
+  "recipes": "Recipes",
+  "search": "Search",
+  "signin": "Sign in",
+  "createRecipe": "Create Recipe",
+  "register": "Register",
+  "createUser": "Create User",
+  "logout": "Logout"
+}

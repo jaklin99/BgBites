@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import "../App.css";
 
 const ContactPage = () => {
+  const { t } = useTranslation("contact");
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,8 +23,7 @@ const ContactPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Here later you can send the data to backend
-    console.log(formData);
+    console.log(formData); // backend later
 
     setShowMessage(true);
 
@@ -39,14 +41,14 @@ const ContactPage = () => {
   return (
     <div className="contact-page">
       <div className="contact-container">
-        <h1>Contact Us</h1>
-        <p>Have a question or feedback?</p>
+        <h1>{t("title")}</h1>
+        <p>{t("subtitle")}</p>
 
         <form className="contact-form" onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
-            placeholder="Your name"
+            placeholder={t("name")}
             value={formData.name}
             onChange={handleChange}
             required
@@ -55,7 +57,7 @@ const ContactPage = () => {
           <input
             type="email"
             name="email"
-            placeholder="Your email"
+            placeholder={t("email")}
             value={formData.email}
             onChange={handleChange}
             required
@@ -63,22 +65,17 @@ const ContactPage = () => {
 
           <textarea
             name="message"
-            placeholder="Write your message..."
+            placeholder={t("message")}
             rows="5"
             value={formData.message}
             onChange={handleChange}
             required
           />
 
-          <button type="submit">Send Message</button>
+          <button type="submit">{t("send")}</button>
         </form>
 
-        {showMessage && (
-          <div className="success-popup">
-            Thank you for your message. We will try to respond as soon as
-            possible.
-          </div>
-        )}
+        {showMessage && <div className="success-popup">{t("success")}</div>}
       </div>
     </div>
   );
