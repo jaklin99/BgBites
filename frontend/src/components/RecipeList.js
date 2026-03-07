@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+// import axios from "axios";  // 🔒 BACKEND DISABLED
 import { useTranslation } from "react-i18next";
 import "../App.css";
 
 function RecipeList() {
-  const { t } = useTranslation("recipeList");
+    const { t } = useTranslation("recipeList");
 
+  /* -----------------------------
+     TEMPORARY HARDCODED RECIPES
+  ------------------------------*/
   const hardcodedRecipes = [
     {
       id: 1,
@@ -42,9 +46,27 @@ function RecipeList() {
     },
   ];
 
-  const [recipes] = useState(hardcodedRecipes);
+  /* -----------------------------
+     STATE
+  ------------------------------*/
+  const [recipes, setRecipes] = useState(hardcodedRecipes);
   const [favorites, setFavorites] = useState([]);
 
+  /* -----------------------------
+     BACKEND FETCH (COMMENTED)
+  ------------------------------*/
+  /*
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/recipes")
+      .then((res) => setRecipes(res.data))
+      .catch((err) => console.error("Failed to load recipes", err));
+  }, []);
+  */
+
+  /* -----------------------------
+     FAVORITES
+  ------------------------------*/
   const toggleFavorite = (e, id) => {
     e.stopPropagation();
     e.preventDefault();
@@ -55,10 +77,8 @@ function RecipeList() {
   };
 
   return (
-    <div className="recipe-list-page">
-      <h1 className="recipe-list-title">{t("title")}</h1>
-
-      <div className="recipe-grid">
+    <div>
+            <div className="recipe-grid">
         {recipes.map((recipe) => (
           <Link
             to={`/recipes/${recipe.id}`}
