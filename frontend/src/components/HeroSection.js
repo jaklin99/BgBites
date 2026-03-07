@@ -1,12 +1,16 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "../App.css";
 
 const HeroSection = () => {
+  const { t } = useTranslation("hero");
+
   return (
     <div className="hero-section">
       <div className="hero-text">
-        <h1>We are a team made up of professional chefs, kitchen & newbies</h1>
-        <button className="btn btn-dark">View Recipe Now</button>
+        <h1>{t("title")}</h1>
+
+        <button className="btn btn-dark">{t("button")}</button>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import recipeList_en from "./en/recipe-list-en.json";
 import recipeDetails_en from "./en/recipe-details-en.json";
 import contact_en from "./en/contact-en.json";
 import home_en from "./en/home-en.json";
+import hero_en from "./en/hero-en.json";
 
 
 /* DUTCH */
@@ -17,6 +18,7 @@ import recipeList_nl from "./nl/recipe-list-nl.json";
 import recipeDetails_nl from "./nl/recipe-details-nl.json";
 import contact_nl from "./nl/contact-nl.json";
 import home_nl from "./nl/home-nl.json";
+import hero_nl from "./nl/hero-nl.json";
 
 
 /* BULGARIAN */
@@ -26,6 +28,7 @@ import recipeList_bg from "./bg/recipe-list-bg.json";
 import recipeDetails_bg from "./bg/recipe-details-bg.json";
 import contact_bg from "./bg/contact-bg.json";
 import home_bg from "./bg/home-bg.json";
+import hero_bg from "./bg/hero-bg.json";
 
 
 i18n.use(initReactI18next).init({
@@ -36,7 +39,8 @@ i18n.use(initReactI18next).init({
       recipeList: recipeList_en,
       recipeDetails: recipeDetails_en,
       contact: contact_en,
-      home: home_en
+      home: home_en,
+      hero: hero_en,
     },
 
     nl: {
@@ -45,7 +49,8 @@ i18n.use(initReactI18next).init({
       recipeList: recipeList_nl,
       recipeDetails: recipeDetails_nl,
       contact: contact_nl,
-      home: home_nl
+      home: home_nl,
+      hero: hero_nl
     },
 
     bg: {
@@ -54,7 +59,8 @@ i18n.use(initReactI18next).init({
       recipeList: recipeList_bg,
       recipeDetails: recipeDetails_bg,
       contact: contact_bg,
-      home: home_bg
+      home: home_bg,
+      hero: hero_bg,
     },
   },
 
