@@ -1,15 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import "../App.css";
 
 const Footer = () => {
+  const { t } = useTranslation("footer");
+
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubscribe = async () => {
     if (!email) {
-      setMessage("Please enter a valid email");
+      setMessage(t("invalidEmail"));
       return;
     }
 
@@ -25,82 +28,78 @@ const Footer = () => {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage("Subscribed successfully!");
+        setMessage(t("success"));
         setEmail("");
       } else {
-        setMessage(data.message || "Subscription failed");
+        setMessage(data.message || t("failed"));
       }
     } catch (error) {
-      setMessage("Server error");
+      setMessage(t("serverError"));
     }
   };
 
   return (
     <footer className="footer-container">
-      {/* Email Subscription Section */}
+      {/* Email Subscription */}
       <div className="email-subscription">
-        <h3>Fresh inspiration via email</h3>
+        <h3>{t("emailTitle")}</h3>
 
         <div className="subscription-form">
           <input
             type="email"
-            placeholder="Your email address"
+            placeholder={t("emailPlaceholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <button onClick={handleSubscribe}>Subscribe Now</button>
+          <button onClick={handleSubscribe}>{t("subscribe")}</button>
         </div>
 
         {message && <p className="subscribe-message">{message}</p>}
       </div>
 
-      {/* Main Footer */}
+      {/* Footer Content */}
       <div className="footer-content container">
         <div className="footer-links">
           <div>
             <ul>
               <h5>BG Bites</h5>
+
               <li>
-                <a href="/">About Us</a>
+                <a href="/">{t("about")}</a>
               </li>
+
               <li>
-                <a href="/contact">Contact</a>
+                <a href="#">{t("blog")}</a>
               </li>
+
               <li>
-                <a href="#">Blog</a>
+                <a href="/recipes">{t("recipes")}</a>
               </li>
+
               <li>
-                <a href="/recipes">Recipes</a>
+                <a href="/admin/login">{t("admin")}</a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h5>Support</h5>
+            <h5>{t("support")}</h5>
+
             <ul>
               <li>
-                <a href="#">Help Center</a>
-              </li>
-              <li>
-                <a href="#">Terms of Service</a>
-              </li>
-              <li>
-                <a href="#">Privacy Policy</a>
-              </li>
-              <li>
-                <a href="#">Status</a>
+                <a href="/contact">{t("contact")}</a>
               </li>
             </ul>
+
+            <h5>{t("community")}</h5>
+
+            <p>
+              {t("communityText")} <a href="#">{t("here")}</a>
+            </p>
           </div>
 
           <div>
-            <h5>Community</h5>
-            <p>
-              Questions or feedback? We'd love to hear from you{" "}
-              <a href="#">here</a>
-            </p>
-
             <div className="social-icons">
               <a href="https://www.instagram.com/bgbitesandbeyond">
                 <FaInstagram />

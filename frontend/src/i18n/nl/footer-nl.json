@@ -2,14 +2,21 @@
   "emailTitle": "Verse inspiratie via e-mail",
   "emailPlaceholder": "Uw e-mailadres",
   "subscribe": "Abonneren",
+
+  "invalidEmail": "Voer een geldig e-mailadres in",
+  "success": "Succesvol geabonneerd!",
+  "failed": "Abonnement mislukt",
+  "serverError": "Serverfout",
+
   "about": "Over ons",
-  "contact": "Contact",
   "blog": "Blog",
   "recipes": "Recepten",
+  "admin": "Admin",
+
   "support": "Ondersteuning",
-  "help": "Helpcentrum",
-  "terms": "Servicevoorwaarden",
-  "privacy": "Privacybeleid",
-  "status": "Status",
-  "communityText": "Vragen of feedback? We horen graag van u"
+  "contact": "Contact",
+
+  "community": "Community",
+  "communityText": "Vragen of feedback? We horen graag van u",
+  "here": "hier"
 }
