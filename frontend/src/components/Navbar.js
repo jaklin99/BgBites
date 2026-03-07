@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import "../App.css";
 import { Form, FormControl, Button } from "react-bootstrap";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaGlobe } from "react-icons/fa";
 
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
@@ -14,6 +14,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState("light");
   const [menuOpen, setMenuOpen] = useState(false);
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -40,8 +41,13 @@ const Navbar = () => {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  const toggleLanguageMenu = () => {
+    setLangOpen(!langOpen);
+  };
+
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+    setLangOpen(false);
   };
 
   return (
@@ -51,7 +57,6 @@ const Navbar = () => {
           <Link to="/">BG Bites</Link>
         </div>
 
-        {/* Hamburger */}
         <div className="menu-icon" onClick={toggleMenu}>
           {menuOpen ? <FaTimes /> : <FaBars />}
         </div>
@@ -104,11 +109,19 @@ const Navbar = () => {
         <div className="navbar-right">
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
 
-          {/* Language Switcher */}
+          {/* LANGUAGE DROPDOWN */}
           <div className="language-switcher">
-            <button onClick={() => changeLanguage("en")}>EN</button>
-            <button onClick={() => changeLanguage("nl")}>NL</button>
-            <button onClick={() => changeLanguage("bg")}>BG</button>
+            <button className="language-icon" onClick={toggleLanguageMenu}>
+              <FaGlobe />
+            </button>
+
+            {langOpen && (
+              <div className="language-menu">
+                <button onClick={() => changeLanguage("en")}>EN</button>
+                <button onClick={() => changeLanguage("nl")}>NL</button>
+                <button onClick={() => changeLanguage("bg")}>БГ</button>
+              </div>
+            )}
           </div>
 
           <Link to="/admin/login" className="btn-signup">

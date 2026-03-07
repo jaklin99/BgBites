@@ -1073,24 +1073,47 @@ body {
 /* LANGUAGE SWITCHER */
 
 .language-switcher {
-  display: flex;
-  gap: 6px;
+  position: relative;
   margin-right: 12px;
 }
 
-.language-switcher button {
+.language-icon {
   border: none;
-  background: transparent;
-  font-weight: 600;
+  background: none;
+  font-size: 18px;
   cursor: pointer;
-  font-size: 14px;
-  padding: 4px 6px;
-  border-radius: 6px;
-  transition: background 0.2s;
+  color: var(--text-color);
 }
 
-.language-switcher button:hover {
-  background: rgba(0, 0, 0, 0.08);
+/* Dropdown */
+
+.language-menu {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  z-index: 1000;
+}
+
+.language-menu button {
+  border: none;
+  padding: 6px 12px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.language-menu button:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+body.dark .language-menu button:hover {
+  background: rgba(255,255,255,0.15);
 }
 
 /* DARK MODE */
