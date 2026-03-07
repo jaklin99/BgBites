@@ -123,10 +123,6 @@ const Navbar = () => {
               </div>
             )}
           </div>
-
-          <Link to="/admin/login" className="btn-signup">
-            {t("signin")}
-          </Link>
         </div>
       )}
     </nav>
