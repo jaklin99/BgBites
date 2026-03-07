@@ -2,9 +2,10 @@
   "all": "Alles",
   "viewAllRecipes": "Bekijk alle recepten",
   "categories": {
+    "new": "Nieuw",
     "breakfast": "Ontbijt",
     "lunch": "Lunch",
-    "dinner": "Avonteten",
-    "dessert": "Nagerechten"
+    "dinner": "Diner",
+    "dessert": "Dessert"
   }
 }

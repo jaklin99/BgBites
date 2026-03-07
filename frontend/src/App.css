@@ -326,6 +326,18 @@ body {
 .recipe-image-wrapper {
   position: relative;
 }
+.new-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff4d4d;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 20px;
+  z-index: 3;
+}
 
 /* Favorite heart */
 .favorite-icon {

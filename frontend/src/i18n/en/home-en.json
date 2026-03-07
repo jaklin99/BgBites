@@ -2,6 +2,7 @@
   "all": "All",
   "viewAllRecipes": "View All Recipes",
   "categories": {
+    "new": "New",
     "breakfast": "Breakfast",
     "lunch": "Lunch",
     "dinner": "Dinner",

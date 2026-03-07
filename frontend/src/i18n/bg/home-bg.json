@@ -2,6 +2,7 @@
   "all": "Всички",
   "viewAllRecipes": "Виж всички рецепти",
   "categories": {
+    "new": "Нови",
     "breakfast": "Закуска",
     "lunch": "Обяд",
     "dinner": "Вечеря",
